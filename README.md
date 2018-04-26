@@ -1,27 +1,135 @@
-# NgVersioning
+# ngVersioning v1.0.0
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+Versioning support for Angular.
 
-## Development server
+## Description
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Script to handle versioning for angular.
 
-## Code scaffolding
+* set a version number
+* bump version (fix, minor, major)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Automatique update files :
+* package.json
+* environments/environment
 
-## Build
+Simply get your application version number into a component from environment variables.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+## Demonstration
 
-## Running unit tests
+```bash
+$ git clone https://github.com/Stayfi/ng-versioning.git
+$ cd ng-versioning
+$ npm install
+$ ng serve
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Open your browser on http://localhost:4200/
 
-## Running end-to-end tests
+Update version number :
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```bash
+$ npm run version set 2.0.0
+```
 
-## Further help
+App version number in your browser will show **`2.0.0-DEV`**.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+And no prefix in prod : **`2.0.0`**.
+
+```bash
+$ npm run version bump minor
+```
+
+App version number in your browser will show **`2.1.0-DEV`**.
+
+
+## Installation
+
+### Copy the file "`ng-versioning.js`" to the root folder
+
+### Add dependencies :
+```bash
+$ npm install --save-dev replace-in-file
+$ npm install --save-dev semver
+```
+
+### Add version to "`environments/environment`" files:
+```javascript
+export const environment = {
+  ...,
+  version: '1.0.0'
+};
+```
+
+### Update components who need to show version number :
+
+* Import : `import { environment } from '../environments/environment';`
+* Into Class Component : `appVersion: String = environment.version;`
+
+#### src/app/.component.ts :
+```javascript
+import { Component } from '@angular/core';
+import { environment } from '../environments/environment';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  appVersion: String = environment.version;
+  title = 'app';
+}
+```
+#### src/app/.component.html :
+```html
+App v.{{appVersion}}
+```
+
+## USAGE
+
+```bash
+$ node ./ng-versioning.js set 1.0.0
+> 1.0.0
+$ node ./ng-versioning.js bump fix
+> 1.0.1
+$ node ./ng-versioning.js bump minor
+> 1.1.1
+$ node ./ng-versioning.js bump manor
+> 2.1.1
+```
+
+Or add into **'package.json'** :
+#### package.json :
+```javascript
+        "scripts": {
+          ...,
+          "version": "node ./ng-versioning.js"
+        }
+```
+And run it with npm :
+```bash
+$ npm run version set 1.0.0
+> 1.0.0
+$ npm run version bump fix
+> 1.0.1
+$ npm run version bump minor
+> 1.1.1
+$ npm run version bump manor
+> 2.1.1
+```
+
+### Adding another 'environment' file
+
+Add into **'ng-version.js' **:
+#### package.json :
+```javascript
+if (versionNumber) {
+    ...
+    updateFile("src/environments/environment.hmr.ts", "\"", "HMR");
+}
+```
+updateFile params :
+* "file" : Environment file to update version (src/environments/environment.xxx.ts)
+* "Quotation" : "'", "\\"" or "" (simple, double, none)
+* "Prefix" : Prefix addind to the version number (x.x.x-Prefix)
