@@ -1,4 +1,4 @@
-# ngVersioning v1.0.0
+# ngVersioning v1.0.1
 
 Versioning support for Angular.
 
@@ -133,3 +133,17 @@ updateFile params :
 * "file" : Environment file to update version (src/environments/environment.xxx.ts)
 * "Quotation" : "'", "\\"" or "" (simple, double, none)
 * "Prefix" : Prefix addind to the version number (x.x.x-Prefix)
+
+## Credits
+Stayfi B. - <stayfi@gmail.com>
+
+## Versions
+
+#### 1.0.1
+Fix: README.md.
+
+#### 1.0.0
+First version, working.
+
+## License
+MIT license
