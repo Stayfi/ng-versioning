@@ -115,7 +115,7 @@ $ npm run version bump fix
 > 1.0.1
 $ npm run version bump minor
 > 1.1.1
-$ npm run version bump manor
+$ npm run version bump major
 > 2.1.1
 ```
 
