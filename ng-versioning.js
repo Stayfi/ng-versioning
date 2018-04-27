@@ -1,5 +1,15 @@
-var replace = require("replace-in-file");
-var semver = require("semver");
+try {
+    var replace = require("replace-in-file");
+} catch (e) {
+    moduleNotFound("replace-in-file");
+    process.exit(e.code);
+}
+try {
+    var semver = require("semver");
+} catch (e) {
+    moduleNotFound("semver");
+    process.exit(e.code);
+}
 var pjson = require("./package.json");
 var fs = require("fs");
 
@@ -15,7 +25,7 @@ var fgBlue = "\x1b[34m";
 
 var args = process.argv.slice(2);
 
-if (!args.length || args.length < 2) {
+if (!args.length || (args[0] != "get" && args.length < 2)) {
     help();
 } else {
     menu(args);
@@ -43,6 +53,10 @@ function menu(args) {
                     break;
             }
             versionNumber = major + "." + minor + "." + fix;
+            break;
+        case "get":
+            extractSemver(pjson.version);
+            getVersion();
             break;
         case "set":
             if (semver.valid(args[1])) {
@@ -103,4 +117,13 @@ function extractSemver(version) {
     major = _ver[0];
     minor = _ver[1];
     fix = _ver[2];
+}
+
+function getVersion() {
+    console.log("App version : " + fgBlue + major + '.' + minor + '.' + fix + clReset);
+}
+
+function moduleNotFound(module) {
+    console.log("\x1b[31m\x1b[1m" + "Module \"" + module + "\" not found, install npm dependencies : \n");
+    console.log("\x1b[93m" + "$ npm install" + "\x1b[0m");
 }
