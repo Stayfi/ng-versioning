@@ -1,4 +1,4 @@
-# ngVersioning v1.0.0
+# ngVersioning v1.0.1
 
 Versioning support for Angular.
 
@@ -95,7 +95,7 @@ $ node ./ng-versioning.js bump fix
 > 1.0.1
 $ node ./ng-versioning.js bump minor
 > 1.1.1
-$ node ./ng-versioning.js bump manor
+$ node ./ng-versioning.js bump major
 > 2.1.1
 ```
 
@@ -121,7 +121,7 @@ $ npm run version bump manor
 
 ### Adding another 'environment' file
 
-Add into **'ng-version.js' **:
+Add into **'ng-version.js'** :
 #### package.json :
 ```javascript
 if (versionNumber) {
@@ -133,3 +133,17 @@ updateFile params :
 * "file" : Environment file to update version (src/environments/environment.xxx.ts)
 * "Quotation" : "'", "\\"" or "" (simple, double, none)
 * "Prefix" : Prefix addind to the version number (x.x.x-Prefix)
+
+## Credits
+Stayfi B. - <stayfi@gmail.com>
+
+## Versions
+
+#### 1.0.1
+Fix: README.md.
+
+#### 1.0.0
+First version, working.
+
+## License
+MIT license
