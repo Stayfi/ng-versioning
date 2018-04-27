@@ -1,4 +1,4 @@
-# ngVersioning v1.0.1
+# ngVersioning v1.0.2
 
 Versioning support for Angular.
 
@@ -29,6 +29,8 @@ Open your browser on http://localhost:4200/
 Update version number :
 
 ```bash
+$ npm run version get
+App version : 1.0.0
 $ npm run version set 2.0.0
 ```
 
@@ -66,7 +68,7 @@ export const environment = {
 * Import : `import { environment } from '../environments/environment';`
 * Into Class Component : `appVersion: String = environment.version;`
 
-#### src/app/.component.ts :
+#### src/app/app.component.ts :
 ```javascript
 import { Component } from '@angular/core';
 import { environment } from '../environments/environment';
@@ -81,7 +83,7 @@ export class AppComponent {
   title = 'app';
 }
 ```
-#### src/app/.component.html :
+#### src/app/app.component.html :
 ```html
 App v.{{appVersion}}
 ```
@@ -89,14 +91,16 @@ App v.{{appVersion}}
 ## USAGE
 
 ```bash
-$ node ./ng-versioning.js set 1.0.0
-> 1.0.0
+$ node ./ng-versioning.js get
+App version : 1.0.0
+$ node ./ng-versioning.js set 2.0.0
+> 2.0.0
 $ node ./ng-versioning.js bump fix
-> 1.0.1
+> 2.0.1
 $ node ./ng-versioning.js bump minor
-> 1.1.1
-$ node ./ng-versioning.js bump major
 > 2.1.1
+$ node ./ng-versioning.js bump major
+> 3.1.1
 ```
 
 Or add into **'package.json'** :
@@ -109,14 +113,16 @@ Or add into **'package.json'** :
 ```
 And run it with npm :
 ```bash
-$ npm run version set 1.0.0
-> 1.0.0
+$ npm run version get
+App version : 1.0.0
+$ npm run version set 2.0.0
+> 2.0.0
 $ npm run version bump fix
-> 1.0.1
+> 2.0.1
 $ npm run version bump minor
-> 1.1.1
-$ npm run version bump manor
 > 2.1.1
+$ npm run version bump manor
+> 3.1.1
 ```
 
 ### Adding another 'environment' file
@@ -138,6 +144,10 @@ updateFile params :
 Stayfi B. - <stayfi@gmail.com>
 
 ## Versions
+
+#### 1.0.2
+Adding "get" to show actual version number.
+Adding check for dependencies.
 
 #### 1.0.1
 Fix: README.md.
