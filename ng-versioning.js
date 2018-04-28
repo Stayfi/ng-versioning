@@ -15,7 +15,7 @@ var fs = require("fs");
 
 var major = 0;
 var minor = 0;
-var fix = 0;
+var patch = 0;
 var versionNumber;
 var fgGreen = "\x1b[32m";
 var clReset = "\x1b[0m";
@@ -48,11 +48,11 @@ function menu(args) {
                 case "minor":
                     minor++;
                     break;
-                case "fix":
-                    fix++;
+                case "patch":
+                    patch++;
                     break;
             }
-            versionNumber = major + "." + minor + "." + fix;
+            versionNumber = major + "." + minor + "." + patch;
             break;
         case "get":
             extractSemver(pjson.version);
@@ -61,7 +61,7 @@ function menu(args) {
         case "set":
             if (semver.valid(args[1])) {
                 extractSemver(args[1]);
-                versionNumber = major + "." + minor + "." + fix;
+                versionNumber = major + "." + minor + "." + patch;
             } else {
                 notSemVer(args[1]);
             }
@@ -69,12 +69,12 @@ function menu(args) {
     }
 }
 
-function updateFile(file, versionFilter, prefix) {
+function updateFile(file, versionFilter, suffix) {
     if (fs.stat(file, function(err, stats) {
             if (err) {
                 console.log(fgRed + file + fgYellow + " not found" + clReset);
             } else {
-                var newVersion = versionNumber + ((prefix !== "") ? "-" + prefix : "");
+                var newVersion = versionNumber + ((suffix !== "") ? "-" + suffix : "");
                 var from = /("version"\s*:\s*")([^"]+)(")/;
                 var to = "\"version\": \"" + newVersion + "\"";
                 if (versionFilter == "\"") {
@@ -103,7 +103,8 @@ function help() {
     return console.log([
         "ngVersioning",
         "Options:",
-        " bump <major/minor/fix>      bump version",
+        " bump <major/minor/patch>      bump version",
+        " get <version>               get version",
         " set <version>               set version"
     ].join("\n"));
 }
@@ -116,11 +117,11 @@ function extractSemver(version) {
     var _ver = version.split(".");
     major = _ver[0];
     minor = _ver[1];
-    fix = _ver[2];
+    patch = _ver[2];
 }
 
 function getVersion() {
-    console.log("App version : " + fgBlue + major + '.' + minor + '.' + fix + clReset);
+    console.log("App version : " + fgBlue + major + '.' + minor + '.' + patch + clReset);
 }
 
 function moduleNotFound(module) {

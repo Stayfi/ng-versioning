@@ -1,4 +1,4 @@
-# ngVersioning v1.0.2
+# ngVersioning v1.0.3
 
 Versioning support for Angular.
 
@@ -7,7 +7,7 @@ Versioning support for Angular.
 Script to handle versioning for angular.
 
 * set a version number
-* bump version (fix, minor, major)
+* bump version (patch, minor, major)
 
 Automatique update files :
 * package.json
@@ -36,7 +36,7 @@ $ npm run version set 2.0.0
 
 App version number in your browser will show **`2.0.0-DEV`**.
 
-And no prefix in prod : **`2.0.0`**.
+And no suffix in prod : **`2.0.0`**.
 
 ```bash
 $ npm run version bump minor
@@ -95,7 +95,7 @@ $ node ./ng-versioning.js get
 App version : 1.0.0
 $ node ./ng-versioning.js set 2.0.0
 > 2.0.0
-$ node ./ng-versioning.js bump fix
+$ node ./ng-versioning.js bump patch
 > 2.0.1
 $ node ./ng-versioning.js bump minor
 > 2.1.1
@@ -117,7 +117,7 @@ $ npm run version get
 App version : 1.0.0
 $ npm run version set 2.0.0
 > 2.0.0
-$ npm run version bump fix
+$ npm run version bump patch
 > 2.0.1
 $ npm run version bump minor
 > 2.1.1
@@ -138,12 +138,15 @@ if (versionNumber) {
 updateFile params :
 * "file" : Environment file to update version (src/environments/environment.xxx.ts)
 * "Quotation" : "'", "\\"" or "" (simple, double, none)
-* "Prefix" : Prefix addind to the version number (x.x.x-Prefix)
+* "Suffix" : suffix addind to the version number (x.x.x-Suffix)
 
 ## Credits
 Stayfi B. - <stayfi@gmail.com>
 
 ## Versions
+
+#### 1.0.3
+Correct semantic (patch) and vocabulary.
 
 #### 1.0.2
 Adding "get" to show actual version number.
