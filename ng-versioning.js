@@ -1,3 +1,9 @@
+var fgGreen = "\x1b[32m";
+var clReset = "\x1b[0m";
+var fgRed = "\x1b[31m\x1b[1m";
+var fgYellow = "\x1b[93m";
+var fgBlue = "\x1b[34m";
+
 try {
     var replace = require("replace-in-file");
 } catch (e) {
@@ -10,6 +16,7 @@ try {
     moduleNotFound("semver");
     process.exit(e.code);
 }
+
 var pjson = require("./package.json");
 var fs = require("fs");
 
@@ -17,11 +24,6 @@ var major = 0;
 var minor = 0;
 var patch = 0;
 var versionNumber;
-var fgGreen = "\x1b[32m";
-var clReset = "\x1b[0m";
-var fgRed = "\x1b[31m\x1b[1m";
-var fgYellow = "\x1b[93m";
-var fgBlue = "\x1b[34m";
 
 var args = process.argv.slice(2);
 
@@ -101,11 +103,11 @@ function updateFile(file, versionFilter, suffix) {
 
 function help() {
     return console.log([
-        "ngVersioning",
-        "Options:",
+        fgGreen + "ngVersioning",
+        fgYellow + "Options:",
         " bump <major/minor/patch>      bump version",
-        " get <version>               get version",
-        " set <version>               set version"
+        " get                           get version",
+        " set <version>                 set version" + clReset
     ].join("\n"));
 }
 
@@ -125,6 +127,8 @@ function getVersion() {
 }
 
 function moduleNotFound(module) {
-    console.log("\x1b[31m\x1b[1m" + "Module \"" + module + "\" not found, install npm dependencies : \n");
-    console.log("\x1b[93m" + "$ npm install" + "\x1b[0m");
+    console.log([
+        fgRed + "Module \"" + module + "\" not found, install npm dependencies :",
+        fgYellow + "$ npm install" + clReset
+    ].join("\n"));
 }
