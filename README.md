@@ -1,4 +1,4 @@
-# ngVersioning v1.0.3
+# ngVersioning v1.0.4
 
 Versioning support for Angular.
 
@@ -145,11 +145,15 @@ Stayfi B. - <stayfi@gmail.com>
 
 ## Versions
 
+#### 1.0.4
+Help and minor corrections.
+
 #### 1.0.3
 Correct semantic (patch) and vocabulary.
 
 #### 1.0.2
 Adding "get" to show actual version number.
+
 Adding check for dependencies.
 
 #### 1.0.1
