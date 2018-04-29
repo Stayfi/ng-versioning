@@ -6,15 +6,13 @@ var fgBlue = "\x1b[34m";
 
 try {
     var replace = require("replace-in-file");
-} catch (e) {
-    moduleNotFound("replace-in-file");
-    process.exit(e.code);
+} catch (err) {
+    moduleNotFound("replace-in-file", err);
 }
 try {
     var semver = require("semver");
-} catch (e) {
-    moduleNotFound("semver");
-    process.exit(e.code);
+} catch (err) {
+    moduleNotFound("semver", err);
 }
 
 var pjson = require("./package.json");
@@ -126,9 +124,10 @@ function getVersion() {
     console.log("App version : " + fgBlue + major + '.' + minor + '.' + patch + clReset);
 }
 
-function moduleNotFound(module) {
+function moduleNotFound(module, err) {
     console.log([
         fgRed + "Module \"" + module + "\" not found, install npm dependencies :",
         fgYellow + "$ npm install" + clReset
     ].join("\n"));
+    process.exit(err.code);
 }
